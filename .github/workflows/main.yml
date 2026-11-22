@@ -11,7 +11,7 @@ jobs:
     steps:
       # Step 1: Checkout Repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
       # Step 2: Update index.html
       - name: Update HTML
         run: |
@@ -24,3 +24,7 @@ jobs:
           if [ "${{ github.actor }}" == "kdandy16" ]; then
             sed -i '/<\/body>/i <p>Updated by Member 1 on '"$(date)"'</p>' index.html
           fi
+      # Step 3: Update README
+      - name: Update README
+        run: |
+          echo "### Updated by ${{ github.actor }} on $(date '+%Y-%m-%d %H:%M:%S') [Commit: $(git rev-parse --short HEAD)]" >> README.md
